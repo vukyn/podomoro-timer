@@ -1,0 +1,29 @@
+$orange600: #FB8C00;
+
+.orange600 {
+    color: $orange600;
+}
+
+.md-18 {
+    font-size: 18px;
+}
+
+.md-24 {
+    font-size: 24px;
+}
+
+.md-36 {
+    font-size: 36px;
+}
+
+.md-48 {
+    font-size: 48px;
+}
+
+.skip-icon {
+    opacity: 0.9;
+    &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+}
