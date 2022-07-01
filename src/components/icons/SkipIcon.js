@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
 import { Button } from "@nextui-org/react";
-import SkipModal from '../modals/SkipModal';
+import PromptModal from "../modals/PromptModal";
 
 const SkipIcon = (props) => {
 
@@ -19,7 +19,8 @@ const SkipIcon = (props) => {
             <Button className="skip-btn" light ripple={false} css={css}>
                 <i className={iconStyle} onClick={openHandler}>skip_next</i>
             </Button>
-            <SkipModal visible={visible} closeHandler={closeHandler} skipHandler={props.skipHandler} />
+            <PromptModal visible={visible} bodyText='Are you sure to skip ?' confirmText='Skip'
+             closeHandler={closeHandler} skipHandler={props.skipHandler} />
         </div>
     );
 }

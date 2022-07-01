@@ -116,15 +116,16 @@ class Timer extends React.Component {
 
     changeTabHandler = (name) => {
         this.setState({
-            tab: name
+            tab: name,
+            isCountDown: false,
+            ...TimerDefaults
         });
     }
 
     skipHandler = () => {
         this.setState({
-            podomoroTimer: '25:00',
             isCountDown: false,
-            podomoroSecond: 1500,
+            ...TimerDefaults
         })
     }
 
