@@ -5,10 +5,11 @@ const RemoveIcon = (props) => {
 
     const size = ' md-' + props.size;
     const color = ' ' + props.color;
+    const css = {minWidth: props.size, height: props.size, padding: 0}
     const iconStyle = 'material-icons remove-icon' + size + color;
 
     return (
-        <Button auto light ripple={false} onPress={props.decreaseTimeHandler}>
+        <Button light ripple={false} css={css} onPress={props.decreaseTimeHandler}>
             <i className={iconStyle}>remove</i>
         </Button>
     );

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
+import { Button } from "@nextui-org/react";
 import SkipModal from '../modals/SkipModal';
 
 const SkipIcon = (props) => {
 
     const size = ' md-' + props.size;
     const color = ' ' + props.color;
+    const css = {minWidth: props.size, height: props.size, padding: 0}
     const iconStyle = 'material-icons skip-icon' + size + color;
 
     const [visible, setVisible] = useState(false);
@@ -14,8 +16,10 @@ const SkipIcon = (props) => {
 
     return (
         <div>
-            <i className={iconStyle} onClick={openHandler}>skip_next</i>
-            <SkipModal visible={visible} closeHandler={closeHandler} skipHandler={props.skipHandler}/>
+            <Button className="skip-btn" light ripple={false} css={css}>
+                <i className={iconStyle} onClick={openHandler}>skip_next</i>
+            </Button>
+            <SkipModal visible={visible} closeHandler={closeHandler} skipHandler={props.skipHandler} />
         </div>
     );
 }

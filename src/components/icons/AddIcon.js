@@ -5,10 +5,11 @@ const AddIcon = (props) => {
 
     const size = ' md-' + props.size;
     const color = ' ' + props.color;
+    const css = {minWidth: props.size, height: props.size, padding: 0}
     const iconStyle = 'material-icons add-icon' + size + color;
 
     return (
-        <Button auto light ripple={false} onPress={props.increaseTimeHandler}>
+        <Button light ripple={false} css={css} onPress={props.increaseTimeHandler}>
             <i className={iconStyle}>add</i>
         </Button>
     );
