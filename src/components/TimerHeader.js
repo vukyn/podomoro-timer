@@ -1,8 +1,7 @@
-import React from "react";
 import { Row, Col } from "@nextui-org/react";
 import TabButton from './buttons/TabButton';
 
-const CardHeader = (props) => {
+const TimerHeader = (props) => {
     return (
         <Row id='CardHeader' align="center" justify="center" gap={1}>
             <Col>
@@ -27,4 +26,4 @@ const CardHeader = (props) => {
     );
 }
 
-export default CardHeader;
+export default TimerHeader;

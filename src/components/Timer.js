@@ -1,10 +1,7 @@
 import React from 'react';
-import CardHeader from './CardHeader';
-import CountdownButton from './buttons/CountdownButton';
-import SkipIcon from './icons/SkipIcon';
-import AddIcon from './icons/AddIcon';
-import RemoveIcon from './icons/RemoveIcon';
-import { Card, Text, Container, Col, Row, styled } from '@nextui-org/react';
+import TimerHeader from './TimerHeader';
+import TimerBody from './TimerBody';
+import { Card, Text, Container, styled } from '@nextui-org/react';
 
 const TimerText = styled(Text, {
     fontSize: '120px',
@@ -13,13 +10,21 @@ const TimerText = styled(Text, {
     lineHeight: '$md'
 });
 
+const TimerDefaults = {
+    podomoroTimer: '25:00',
+    shortBreakTimer: '05:00',
+    longBreakTimer: '15:00',
+    podomoroSecond: 1500,
+    shortBreakSecond: 300,
+    longBreakSecond: 900,
+}
+
 class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            timer: '25:00',
+            ...TimerDefaults,
             isCountDown: false,
-            second: 1500,
             tab: 'podomoro'
         }
         this.increaseTimeHandler = this.increaseTimeHandler.bind(this);
@@ -30,7 +35,7 @@ class Timer extends React.Component {
     }
 
     componentDidMount = () => {
-        document.title = this.state.timer + ' - Time to concentrate!';
+        document.title = this.state.podomoroTimer + ' - Time to concentrate!';
     }
 
     startStopHandler = () => {
@@ -40,22 +45,72 @@ class Timer extends React.Component {
     }
 
     increaseTimeHandler = () => {
-        const time = this.state.second + 60;
-        if (this.state.second < 3600) {
-            this.setState({
-                second: time,
-                timer: this.displayTimer(time)
-            });
+        var time = 0;
+        switch (this.state.tab) {
+            case 'podomoro':
+                time = this.state.podomoroSecond + 60;
+                if (this.state.podomoroSecond < 3600) {
+                    this.setState({
+                        podomoroSecond: time,
+                        podomoroTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            case 'short break':
+                time = this.state.shortBreakSecond + 60;
+                if (this.state.shortBreakSecond < 3600) {
+                    this.setState({
+                        shortBreakSecond: time,
+                        shortBreakTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            case 'long break':
+                time = this.state.longBreakSecond + 60;
+                if (this.state.longBreakSecond < 3600) {
+                    this.setState({
+                        longBreakSecond: time,
+                        longBreakTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            default:
+                break;
         }
     }
 
     decreaseTimeHandler = () => {
-        const time = this.state.second - 60;
-        if (this.state.second > 60) {
-            this.setState({
-                second: time,
-                timer: this.displayTimer(time)
-            });
+        var time = 0;
+        switch (this.state.tab) {
+            case 'podomoro':
+                time = this.state.podomoroSecond - 60;
+                if (this.state.podomoroSecond > 60) {
+                    this.setState({
+                        podomoroSecond: time,
+                        podomoroTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            case 'short break':
+                time = this.state.shortBreakSecond - 60;
+                if (this.state.shortBreakSecond > 60) {
+                    this.setState({
+                        shortBreakSecond: time,
+                        shortBreakTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            case 'long break':
+                time = this.state.longBreakSecond - 60;
+                if (this.state.longBreakSecond > 60) {
+                    this.setState({
+                        longBreakSecond: time,
+                        longBreakTimer: this.displayTimer(time)
+                    });
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -67,23 +122,53 @@ class Timer extends React.Component {
 
     skipHandler = () => {
         this.setState({
-            timer: '25:00',
+            podomoroTimer: '25:00',
             isCountDown: false,
-            second: 1500,
+            podomoroSecond: 1500,
         })
     }
 
     countdownTime = () => {
-        setTimeout(() => {
-            if (this.state.second > 0 && this.state.isCountDown) {
-                const second = this.state.second - 1;
-                this.setState({
-                    second: second,
-                    timer: this.displayTimer(second)
-                });
-                this.countdownTime();
-            }
-        }, 1000);
+        switch (this.state.tab) {
+            case 'podomoro':
+                setTimeout(() => {
+                    if (this.state.podomoroSecond > 0 && this.state.isCountDown) {
+                        const second = this.state.podomoroSecond - 1;
+                        this.setState({
+                            podomoroSecond: second,
+                            podomoroTimer: this.displayTimer(second)
+                        });
+                        this.countdownTime();
+                    }
+                }, 1000);
+                break;
+            case 'short break':
+                setTimeout(() => {
+                    if (this.state.shortBreakSecond > 0 && this.state.isCountDown) {
+                        const second = this.state.shortBreakSecond - 1;
+                        this.setState({
+                            shortBreakSecond: second,
+                            shortBreakTimer: this.displayTimer(second)
+                        });
+                        this.countdownTime();
+                    }
+                }, 1000);
+                break;
+            case 'long break':
+                setTimeout(() => {
+                    if (this.state.longBreakSecond > 0 && this.state.isCountDown) {
+                        const second = this.state.longBreakSecond - 1;
+                        this.setState({
+                            longBreakSecond: second,
+                            longBreakTimer: this.displayTimer(second)
+                        });
+                        this.countdownTime();
+                    }
+                }, 1000);
+                break;
+            default:
+                break;
+        }
     }
 
     displayTimer = (time) => {
@@ -104,42 +189,34 @@ class Timer extends React.Component {
     }
 
     render() {
+        var timerText = '';
+
+        switch (this.state.tab) {
+            case 'podomoro':
+                timerText = <TimerText id='timer-text'>{this.state.podomoroTimer}</TimerText>
+                break;
+            case 'short break':
+                timerText = <TimerText id='timer-text'>{this.state.shortBreakTimer}</TimerText>
+                break;
+            case 'long break':
+                timerText = <TimerText id='timer-text'>{this.state.longBreakTimer}</TimerText>
+                break;
+            default:
+                break;
+        }
+
         return (
             <Container id='timer-box' css={{ maxWidth: '480px', margin: 'auto' }}>
                 <Card css={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '20px 0px 30px', marginBottom: '20px' }}>
                     <Card.Header>
-                        <CardHeader tab={this.state.tab} changeTabHandler={this.changeTabHandler} />
+                        <TimerHeader tab={this.state.tab} changeTabHandler={this.changeTabHandler} />
                     </Card.Header>
                     <Card.Divider />
                     <Card.Body css={{ textAlign: 'center' }}>
-                        <TimerText id='timer-text'>{this.state.timer}</TimerText>
-                        <Row id='control-buttons' justify='center' align='center' gap={0}>
-                            <Col>
-                                <Row justify='center' align='center' css={{ paddingTop: '5px' }}>
-                                    {!this.state.isCountDown &&
-                                        <RemoveIcon size={36} decreaseTimeHandler={this.decreaseTimeHandler}/>
-                                    }
-                                </Row>
-                            </Col>
-                            <Col>
-                                {
-                                    this.state.isCountDown ?
-                                        <CountdownButton ripple={false} color='primary' size='primary' border='stop'
-                                            font='primary' onPress={this.startStopHandler}>STOP</CountdownButton> :
-                                        <CountdownButton ripple={false} color='primary' size='primary' border='start'
-                                            font='primary' onPress={this.startStopHandler}>START</CountdownButton>
-                                }
-                            </Col>
-                            <Col>
-                                <Row justify='center' align='center' css={{ paddingTop: '5px' }}>
-                                    {
-                                        this.state.isCountDown ?
-                                            <SkipIcon size={36} skipHandler={this.skipHandler} /> :
-                                            <AddIcon size={36} increaseTimeHandler={this.increaseTimeHandler}/>
-                                    }
-                                </Row>
-                            </Col>
-                        </Row>
+                        {timerText}
+                        <TimerBody isCountDown={this.state.isCountDown} increaseTimeHandler={this.increaseTimeHandler}
+                            decreaseTimeHandler={this.decreaseTimeHandler} startStopHandler={this.startStopHandler}
+                            skipHandler={this.skipHandler} />
                     </Card.Body>
                 </Card>
             </Container>
