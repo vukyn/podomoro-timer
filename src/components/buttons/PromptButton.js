@@ -1,6 +1,6 @@
 import { Button, styled } from '@nextui-org/react';
 
-const SkipButton = styled(Button, {
+const PromptButton = styled(Button, {
     variants: {
         size: {
             primary: {
@@ -22,4 +22,4 @@ const SkipButton = styled(Button, {
     }
 });
 
-export default SkipButton;
+export default PromptButton;

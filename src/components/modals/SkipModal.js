@@ -1,6 +1,6 @@
 
 import { Modal, Text } from "@nextui-org/react";
-import SkipButton from "../buttons/SkipButton";
+import PromptButton from "../buttons/PromptButton";
 
 const SkipModal = (props) => {
     return (
@@ -11,12 +11,12 @@ const SkipModal = (props) => {
                 <Text h5 color="neutral">Are you sure to skip ?</Text>
             </Modal.Body>
             <Modal.Footer>
-                <SkipButton size='primary' color="primary" onClick={props.closeHandler}>
+                <PromptButton size='primary' color="primary" onClick={props.closeHandler}>
                     Cancel
-                </SkipButton>
-                <SkipButton size='primary' color="primary" onClick={props.skipHandler}>
+                </PromptButton>
+                <PromptButton size='primary' color="primary" onClick={props.skipHandler}>
                     Skip
-                </SkipButton>
+                </PromptButton>
             </Modal.Footer>
         </Modal>
     );

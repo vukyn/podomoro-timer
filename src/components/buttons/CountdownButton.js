@@ -35,7 +35,8 @@ const CountdownButton = styled(Button, {
                 color: 'rgb(217, 85, 80)',
                 backgroundColor: 'white',
                 '&:active': {
-                    boxShadow: 'none'
+                    boxShadow: 'none',
+                    transform: 'translateY(6px)'
                 }
             }
         }

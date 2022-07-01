@@ -1,8 +1,9 @@
 import React from 'react';
 import CardHeader from './CardHeader';
 import CountdownButton from './buttons/CountdownButton';
-import VolumeButton from './buttons/VolumeButton';
 import SkipIcon from './icons/SkipIcon';
+import AddIcon from './icons/AddIcon';
+import RemoveIcon from './icons/RemoveIcon';
 import { Card, Text, Container, Col, Row, styled } from '@nextui-org/react';
 
 const TimerText = styled(Text, {
@@ -116,16 +117,16 @@ class Timer extends React.Component {
                             <Col>
                                 <Row justify='center' align='center' css={{ paddingTop: '5px' }}>
                                     {!this.state.isCountDown &&
-                                        <VolumeButton size='primary' color='primary' onPress={this.decreaseTimeHandler}>-</VolumeButton>
+                                        <RemoveIcon size={36} decreaseTimeHandler={this.decreaseTimeHandler}/>
                                     }
                                 </Row>
                             </Col>
                             <Col>
                                 {
                                     this.state.isCountDown ?
-                                        <CountdownButton color='primary' size='primary' border='stop'
+                                        <CountdownButton ripple={false} color='primary' size='primary' border='stop'
                                             font='primary' onPress={this.startStopHandler}>STOP</CountdownButton> :
-                                        <CountdownButton color='primary' size='primary' border='start'
+                                        <CountdownButton ripple={false} color='primary' size='primary' border='start'
                                             font='primary' onPress={this.startStopHandler}>START</CountdownButton>
                                 }
                             </Col>
@@ -134,7 +135,7 @@ class Timer extends React.Component {
                                     {
                                         this.state.isCountDown ?
                                             <SkipIcon size={36} skipHandler={this.skipHandler} /> :
-                                            <VolumeButton size='primary' color='primary' onPress={this.increaseTimeHandler}>+</VolumeButton>
+                                            <AddIcon size={36} increaseTimeHandler={this.increaseTimeHandler}/>
                                     }
                                 </Row>
                             </Col>
