@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 import { Modal, Text } from "@nextui-org/react";
 import PromptButton from "../buttons/PromptButton";
